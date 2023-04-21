@@ -7,9 +7,9 @@
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <?php for($i=1; $i<= $totalPages; $i++): ?>
+            <li class="page-item"><a class="page-link" href="#"><?= $i ?></a></li>
+            <?php endfor; ?>
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
