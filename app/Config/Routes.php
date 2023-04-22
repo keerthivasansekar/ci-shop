@@ -35,6 +35,7 @@ $routes->get('/', 'HomeController::index');
 
 $routes->group('shop', function($routes){
     $routes->add('/', 'ShopController::index');
+    $routes->add('(:num)', 'ShopController::index/$1');
 });
 /*
  * --------------------------------------------------------------------

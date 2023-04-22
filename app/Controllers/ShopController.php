@@ -6,8 +6,9 @@ use App\Controllers\BaseController;
 
 class ShopController extends BaseController
 {
-    public function index()
+    public function index(int $currentPage = 1)
     {
-        return view('layouts/shop');
+        $data['currentPage'] = $currentPage;
+        return view('layouts/shop', $data);
     }
 }
