@@ -13,7 +13,10 @@
         </div>
         <div class="card-footer d-flex justify-content-between bg-light border">
             <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-            <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+            <form method="post" action="cart/add-to-cart/<?= $product['id'] ?>" id="form_<?= $product['id'] ?>">
+                <label for="quantity">QTY:</label><input style="width:40px; height:25px; margin-left:5px; margin-right:5px" type="number" name="quantity" id="<?= $product['id'] ?>_quantity" onchange="qtyCheck(<?= $product['id'] ?>)" placeholder="0" min="0">
+                <button type="submit" class="btn btn-sm text-dark p-0" id="btnAddToCart_<?= $product['id'] ?>" onclick="cart(event, <?= $product['id'] ?>)" disabled><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+            </form>
         </div>
     </div>
 </div>
