@@ -37,6 +37,14 @@ $routes->group('shop', function($routes){
     $routes->add('/', 'ShopController::index');
     $routes->add('(:num)', 'ShopController::index/$1');
 });
+
+// Cart Group
+$routes->group('cart', function($routes){
+    $routes->add('/', 'CartController::index');
+    $routes->add('cart-products', 'CartController::cart_products');
+    $routes->add('empty-cart', 'CartController::empty_cart');
+    $routes->add('add-to-cart/(:num)', 'CartController::add_to_cart/$1');
+});
 /*
  * --------------------------------------------------------------------
  * Additional Routing

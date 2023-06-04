@@ -13,3 +13,19 @@
  *
  * @see: https://codeigniter.com/user_guide/extending/common.html
  */
+
+ function checkLogin(){
+    $session = sessionInit();
+    $isUserLoggedIn = $session->get('isUserLoggedIn');
+    if (!isset($isUserLoggedIn)) {
+        return false;
+    } else {
+        return true;
+    }
+    
+
+}
+
+function sessionInit(){
+    return session();
+}

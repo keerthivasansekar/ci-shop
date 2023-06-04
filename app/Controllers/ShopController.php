@@ -11,4 +11,5 @@ class ShopController extends BaseController
         $data['currentPage'] = $currentPage;
         return view('layouts/shop', $data);
     }
+
 }
