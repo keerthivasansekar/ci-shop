@@ -12,7 +12,6 @@ function cart(event, id){
             setTimeout(function(){
                 $('#'+resp.id+'_quantity').val(0);
                 $('#btnAddToCart_'+resp.id).html('<i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart');
-                console.log(resp.cart);
             }, 1000);            
         }
     });

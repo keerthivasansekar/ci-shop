@@ -33,9 +33,18 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'HomeController::index');
 
+// Shop Group
 $routes->group('shop', function($routes){
     $routes->add('/', 'ShopController::index');
     $routes->add('(:num)', 'ShopController::index/$1');
+});
+
+// Auth Group
+$routes->group('auth', function($routes){
+    $routes->add('register', 'Auth\RegisterController::index');
+    $routes->add('login', 'Auth\LoginController::index');
+    $routes->add('logout', 'Auth\LoginController::logout');
+    
 });
 
 // Cart Group
