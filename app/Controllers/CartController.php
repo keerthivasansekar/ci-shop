@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
+use App\Models\CartModel;
 
 class CartController extends BaseController
 {
@@ -13,12 +14,11 @@ class CartController extends BaseController
     }
 
     public function add_to_cart($productId = null){
-        $session = session();
         $data = [
             'id' => $productId,
             'quantity' => $this->request->getPost('quantity')
         ];
-        helper('AuthHelper');
+        helper('auth');
         if (checkLogin()) {
             $this->add_to_table($data);
         } else {
@@ -29,8 +29,6 @@ class CartController extends BaseController
         $response = [
             'status' => true,
             'id' => $productId,
-            'quantity' => $this->request->getPost('quantity'),
-            'cart' => $session->get('cart')
         ];
         return json_encode($response);
     }
@@ -70,6 +68,33 @@ class CartController extends BaseController
     }
 
     private function add_to_table($productData = null){
+        $session = session();
+        $cartModel = new CartModel();
+        $userId = $session->get('userId');
+        $cartTable = $cartModel->where('user_id', $userId)->first();
+        if ($cartTable) {
+            $cartItems = json_decode($cartTable['cart_products'], true);
+            $itemKey = (string)array_search($productData['id'], array_column($cartItems, 'id'));
+            if ($itemKey != null) {
+                $cartItems[$itemKey]['quantity'] += $productData['quantity'];
+            }
+            else {
+                array_push($cartItems, $productData);
+            }
+            $data = [
+                'user_id' => $userId,
+                'cart_products' => json_encode($cartItems)
+            ];
+            $cartModel->update($cartTable['cart_id'], $data);
+        } else {
+            $cartItems = [];
+            array_push($cartItems, $productData);
+            $data = [
+                'user_id' => $userId,
+                'cart_products' => json_encode($cartItems)
+            ];
+            $cartModel->save($data);
+        }
         
     }
 }
